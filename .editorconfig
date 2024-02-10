@@ -1,0 +1,28 @@
+# EditorConfig helps developers define and maintain consistent
+# coding styles between different editors and IDEs
+
+# Top-most EditorConfig file
+root = true
+
+# Unix-style newlines
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+# Set default charset to UTF-8
+[*.{js,jsx,ts,tsx,css,scss,html,xml,yml,yaml,json}]
+charset = utf-8
+
+# Use 2 spaces for indentation
+[*.{js,jsx,ts,tsx,css,scss,html,xml,yml,yaml,json}]
+indent_style = space
+indent_size = 2
+
+# Trim trailing whitespaces
+[*.{js,jsx,ts,tsx,css,scss,html,xml,yml,yaml,json}]
+trim_trailing_whitespace = true
+
+# Ensure a blank line at the end of the file
+[*.{js,jsx,ts,tsx,css,scss,html,xml,yml,yaml,json}]
+ensure_newline_at_eof = true
+

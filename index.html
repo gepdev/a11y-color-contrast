@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>foreground/background color contrast a11y</title>
+		<style>
+			body {
+				font-family: Arial, Helvetica, sans-serif;
+			}
+			.content {
+				--accessible-color: calc(
+					(
+							(
+									(
+											(var(--background-r) * 299) + (var(--background-g) * 587) +
+												(var(--background-b) * 114)
+										) / 1000
+								) - 125
+						) * -1000
+				);
+				padding: 2rem;
+				color: rgb(
+					var(--accessible-color),
+					var(--accessible-color),
+					var(--accessible-color)
+				);
+				background-color: rgb(
+					var(--background-r),
+					var(--background-g),
+					var(--background-b)
+				);
+			}
+			.controls {
+				position: relative;
+				z-index: 1;
+				display: flex;
+				flex-wrap: wrap;
+				padding: 1rem;
+				color: #333;
+				text-transform: uppercase;
+				background-color: rgba(220, 220, 220, 0.5);
+			}
+
+			.controls .title {
+				flex: 2 0 100%;
+				margin: 0.5rem;
+				font-weight: 900;
+				font-size: 1.25em;
+				text-align: center;
+				letter-spacing: 0.03125em;
+			}
+
+			.controls fieldset {
+				width: calc(33.333% - 1rem);
+				border: none;
+				margin: 0.5rem;
+			}
+
+			.controls label {
+				display: block;
+				font-size: x-small;
+				letter-spacing: 0.0625em;
+			}
+
+			.controls input[type="range"] {
+				position: relative;
+				width: 100%;
+			}
+
+			.controls input[type="range"]::before {
+				content: attr(data-value);
+				position: absolute;
+				bottom: 100%;
+				right: 0;
+			}
+		</style>
+		<script src="./index.js" defer></script>
+	</head>
+	<body>
+		<div
+			class="content"
+			style="--background-r: 28; --background-g: 150; --background-b: 130;"
+		>
+			Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis quae
+			quidem minima ipsa amet dolor totam eius. Nemo aperiam temporibus quos
+			consequatur laborum cumque ipsam architecto fugiat amet, odio deleniti.
+		</div>
+
+		<div class="controls">
+			<h2 class="title">Background Color</h2>
+
+			<fieldset>
+				<div class="form-element">
+					<label for="red">Red</label>
+					<input
+						id="red"
+						class="range red"
+						name="background-r"
+						type="range"
+						min="0"
+						max="255"
+					/>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<div class="form-element">
+					<label for="green">Green</label>
+					<input
+						id="green"
+						class="range green"
+						name="background-g"
+						type="range"
+						min="0"
+						max="255"
+					/>
+				</div>
+			</fieldset>
+
+			<fieldset>
+				<div class="form-element">
+					<label for="blue">Blue</label>
+					<input
+						id="blue"
+						class="range blue"
+						name="background-b"
+						type="range"
+						min="0"
+						max="255"
+					/>
+				</div>
+			</fieldset>
+		</div>
+
+		<footer>
+			<p>
+				The calculation of the text color is using this algorithm from
+				<a href="https://www.w3.org/TR/AERT/#color-contrast">W3</a>
+			</p>
+		</footer>
+	</body>
+</html>
